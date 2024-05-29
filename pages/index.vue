@@ -7,4 +7,6 @@
 const { data, pending, error, refresh } = useFetch("/api/hello");
 </script>
 
-<style></style>
+<style>
+
+</style>
