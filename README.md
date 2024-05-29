@@ -9,7 +9,7 @@ Make sure to install the dependencies:
 ```bash
 # npm
 npm install
-
+ahegao
 # pnpm
 pnpm install
 
