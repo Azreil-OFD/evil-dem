@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+$element-radius: 27px;
+$element-height: 40px;
+$element-font-size: 18px;
+
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+body, html {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 300;
+}
+
+.register {
+    width: 400px;
+    text-align: left;
+
+    button {
+        cursor: pointer;
+        border-radius: $element-radius;
+        padding: 0 50px;
+        width: fit-content;
+        border: none;
+        background-color: #D9D9D9;
+        height: $element-height;
+        margin: 20px auto 10px auto;
+        font-size: $element-font-size;
+        font-weight: normal;
+    }
+}
+  
+.register-form {
+    display: flex;
+    flex-direction: column;
+}
+  
+.register-input {
+    display: flex;
+    flex-direction: column;
+  
+    label {
+        margin: 0 0 6px 5px;
+        color: #999999;
+        font-size: $element-font-size;
+        letter-spacing: .5px;
+    }
+
+    input {
+        border-radius: $element-radius;
+        border: none;
+        background-color: #D9D9D9;
+        background-clip: padding-box;
+        height: $element-height;
+        margin-bottom: 20px;
+        font-size: $element-font-size;
+        font-weight: 300;
+        padding: 0 15px;
+    }
+}
+  
+.register-link {
+    color: #585858;
+    margin: 0 auto;
+    font-size: $element-font-size;
+}
