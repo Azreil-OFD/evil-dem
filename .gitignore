@@ -6,6 +6,8 @@
 .cache
 dist
 
+
+package-lock.json
 # Node dependencies
 node_modules
 
@@ -22,3 +24,7 @@ logs
 .env
 .env.*
 !.env.example
+
+
+# Docker test data files
+docker/
