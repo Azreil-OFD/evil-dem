@@ -32,7 +32,7 @@ export default defineEventHandler(async (event) => {
             data: null,
             error: {
                 code: 409,
-                message: 'Поле должно содержать уникальное значение: login',
+                message: createUserResult.error,
             },
         };
     }
