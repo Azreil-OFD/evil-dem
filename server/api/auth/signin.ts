@@ -5,7 +5,6 @@ import { SignInData } from '~/utils/server/types';
 import validateSignIn from '~/utils/server/validateSignIn';
 
 export default defineEventHandler(async (event) => {
-    console.log(event.headers);
     const body: SignInData = await readBody(event);
     const validate = validateSignIn(body);
     if (!validate.validate) {

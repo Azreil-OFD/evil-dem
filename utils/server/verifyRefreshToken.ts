@@ -10,7 +10,6 @@ export default async (refreshToken: string) => {
 
     try {
         const decoded = jwt.verify(refreshToken, refreshSecret) as DecodedToken;
-        console.log();
 
         const user = await prisma.user.findUnique({
             where: {
