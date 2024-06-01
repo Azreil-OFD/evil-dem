@@ -1,24 +1,24 @@
 <template>
-  <div class="register">
-    <form @submit.prevent="register" class="register-form">
-      <div class="register-input">
+  <div class="form">
+    <form @submit.prevent="register">
+      <div class="form-input">
         <label for="fio">ФИО</label>
-        <input type="text" v-model="fio" id="password" required>
+        <input type="text" v-model="fio" required>
       </div>
-      <div class="register-input">
+      <div class="form-input">
         <label for="organisation">Наименование организации</label>
-        <input type="text" v-model="organisation" id="password" required>
+        <input type="text" v-model="organisation" required>
       </div>
-      <div class="register-input">
+      <div class="form-input">
         <label for="login">Логин</label>
-        <input type="text" v-model="login" id="username" required>
+        <input type="text" v-model="login" required>
       </div>
-      <div class="register-input">
+      <div class="form-input">
         <label for="password">Пароль</label>
-        <input type="password" v-model="password" id="password" required>
+        <input type="password" v-model="password" required>
       </div>
       <button type="submit">Зарегистрироваться</button>
-      <nuxt-link to="/signin" class="register-link">Войти</nuxt-link>
+      <nuxt-link to="/signin" class="form-link">Войти</nuxt-link>
     </form>
   </div>
 </template>
@@ -32,11 +32,13 @@ const login = ref('');
 const password = ref('');
 
 const register = () => {
-  navigateTo('/index')
+  navigateTo('/home')
   console.log(`Регистрация организация - ${organisation.value} логин- ${login.value} пароль - ${password.value}`);
 }
 </script>
 
 <style lang="scss" scoped>
-
+.form {
+  margin-top: 50%;
+}
 </style>

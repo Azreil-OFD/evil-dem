@@ -1,16 +1,16 @@
 <template>
-  <div class="register">
-    <form @submit.prevent="register" class="register-form">
-      <div class="register-input">
+  <div class="form">
+    <form @submit.prevent="sign">
+      <div class="form-input">
         <label for="login">Логин</label>
-        <input type="text" v-model="login" id="username" required>
+        <input type="text" v-model="login" required>
       </div>
-      <div class="register-input">
+      <div class="form-input">
         <label for="password">Пароль</label>
-        <input type="password" v-model="password" id="password" required>
+        <input type="password" v-model="password" required>
       </div>
       <button type="submit">Войти</button>
-      <nuxt-link to="/signup" class="register-link">Зарегистрироваться</nuxt-link>
+      <nuxt-link to="/signup" class="form-link">Зарегистрироваться</nuxt-link>
     </form>
   </div>
 </template>
@@ -21,14 +21,16 @@ import { ref } from 'vue';
 const password = ref('');
 const login = ref('');
 
-const register = () => {
+const sign = () => {
   if (true) {
-    navigateTo('/signup')
+    navigateTo('/home')
   }
   console.log(`Вход логин - ${login.value} пароль - ${password.value}`);
 }
 </script>
 
 <style lang="scss" scoped>
-
+.form {
+  margin-top: 70%;
+}
 </style>
