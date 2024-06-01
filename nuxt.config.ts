@@ -7,8 +7,14 @@ export default defineNuxtConfig({
             enabled: true,
         },
     },
-    modules: ['@nuxt/test-utils/module', 'nuxt-openapi-docs-module'],
-    openApiDocs: {
+
+  },
+  ssr: false,
+  css: [
+    '~/assets/css/global.scss'
+  ],
+  modules: ['@nuxt/test-utils/module', 'nuxt-openapi-docs-module'],
+  openApiDocs: {
         folder: './docs',
         name: 'Api Docs',
         debug: true,
@@ -21,3 +27,4 @@ export default defineNuxtConfig({
         },
     },
 });
+

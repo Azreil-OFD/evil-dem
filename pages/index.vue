@@ -5,7 +5,7 @@
     <div>{{ error }}</div>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 const data: any = ref(null);
 const error: any = ref(null);
 
@@ -16,4 +16,6 @@ const load = () => {
 };
 </script>
 
-<style></style>
+<style>
+
+</style>
