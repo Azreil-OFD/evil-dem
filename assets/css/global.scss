@@ -55,7 +55,7 @@ summary {
         letter-spacing: .5px;
     }
 
-    input {
+    input, select {
         border-radius: $element-radius;
         border: none;
         background-color: #D9D9D9;
@@ -65,6 +65,10 @@ summary {
         font-size: $element-font-size;
         font-weight: 300;
         padding: 0 15px;
+    }
+    
+    select {
+        cursor: pointer;
     }
 }
   
