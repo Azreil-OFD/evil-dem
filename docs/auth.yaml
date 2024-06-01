@@ -1,0 +1,213 @@
+openapi: 3.0.0
+info:
+  title: DemExam API
+  version: 1.0.0
+  description: API для аутентификации и управления токенами в проекте DemExam.
+paths:
+  /api/auth/signin:
+    post:
+      summary: Вход пользователя
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: "user123"
+                password:
+                  type: string
+                  example: "password123"
+      responses:
+        '200':
+          description: Успешный вход
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                      refresh:
+                        type: string
+                  error:
+                    type: null
+        '400':
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: null
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: integer
+                        example: 400
+                      message:
+                        type: string
+                        example: "Validation error message"
+        '409':
+          description: Неверный логин или пароль
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: null
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: integer
+                        example: 409
+                      message:
+                        type: string
+                        example: "Неверный логин или пароль!"
+  /api/auth/signup:
+    post:
+      summary: Регистрация пользователя
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: "newuser"
+                password:
+                  type: string
+                  example: "newpassword123"
+                email:
+                  type: string
+                  example: "newuser@example.com"
+      responses:
+        '200':
+          description: Успешная регистрация
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                      refresh:
+                        type: string
+                  error:
+                    type: null
+        '400':
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: null
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: integer
+                        example: 400
+                      message:
+                        type: string
+                        example: "Validation error message"
+        '409':
+          description: Поле должно содержать уникальное значение
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: null
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: integer
+                        example: 409
+                      message:
+                        type: string
+                        example: "Поле должно содержать уникальное значение: login"
+  /api/auth/refresh:
+    post:
+      summary: Обновление токенов
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refreshToken:
+                  type: string
+                  example: "your_refresh_token"
+      responses:
+        '200':
+          description: Успешное обновление токенов
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                      refresh:
+                        type: string
+                  error:
+                    type: null
+        '400':
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: null
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: integer
+                        example: 400
+                      message:
+                        type: string
+                        example: "Validation error message"
+        '401':
+          description: Невалидный токен
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: null
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: integer
+                        example: 401
+                      message:
+                        type: string
+                        example: "Невалидный токен"
