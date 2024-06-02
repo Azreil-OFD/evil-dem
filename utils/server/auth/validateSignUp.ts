@@ -1,4 +1,4 @@
-import type { SignUpData, ValidationResult } from './types';
+import type { SignUpData, ValidationResult } from '../types';
 
 export default (data: Partial<SignUpData>): ValidationResult => {
     const requiredFields: (keyof SignUpData)[] = [

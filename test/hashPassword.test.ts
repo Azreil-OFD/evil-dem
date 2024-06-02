@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
 import bcrypt from 'bcrypt';
-import hashPassword from '~/utils/server/hashPassword';
+import hashPassword from '~/utils/server/auth/hashPassword';
 
 describe('hashPassword', () => {
     test('должен возвращать захешированный пароль', async () => {

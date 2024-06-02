@@ -22,3 +22,6 @@ export type ValidationResult = {
 export type RefreshTokenData = {
     refreshToken: string;
 };
+export type DecodedToken = {
+    login: string;
+};

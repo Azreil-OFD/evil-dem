@@ -1,7 +1,7 @@
 import { describe, test, expect } from 'vitest';
 import jwt from 'jsonwebtoken';
 import type { TokenData } from '~/utils/server/types';
-import generateRefreshToken from '~/utils/server/generateRefreshToken';
+import generateRefreshToken from '~/utils/server/token/generateRefreshToken';
 
 describe('generateRefreshToken', () => {
     test('должен генерировать действительный рефреш JWT токен', () => {

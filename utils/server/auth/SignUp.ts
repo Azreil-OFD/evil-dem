@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import type { SignUpData } from './types';
+import type { SignUpData } from '../types';
 import hashPassword from './hashPassword';
 const prisma = new PrismaClient();
 

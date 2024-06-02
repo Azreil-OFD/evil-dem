@@ -1,7 +1,7 @@
 import { describe, test, expect } from 'vitest';
 import jwt from 'jsonwebtoken';
 import type { TokenData } from '~/utils/server/types';
-import generateAccessToken from '~/utils/server/generateAccessToken';
+import generateAccessToken from '~/utils/server/token/generateAccessToken';
 
 describe('generateAccessToken', () => {
     test('должен генерировать действительный JWT токен', () => {

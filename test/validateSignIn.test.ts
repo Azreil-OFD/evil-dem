@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
 import type { SignInData, ValidationResult } from '~/utils/server/types';
-import validateSignIn from '~/utils/server/validateSignIn';
+import validateSignIn from '~/utils/server/auth/validateSignIn';
 
 describe('validateSignIn', () => {
     test('должен вернуть validate: true, если все поля присутствуют и корректны', () => {

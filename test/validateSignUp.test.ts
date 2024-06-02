@@ -1,5 +1,5 @@
 import type { SignUpData, ValidationResult } from '~/utils/server/types';
-import validateSignUp from '../utils/server/validateSignUp';
+import validateSignUp from '../utils/server/auth/validateSignUp';
 import { describe, test, expect } from 'vitest';
 
 describe('validateSignUp', () => {

@@ -1,32 +1,27 @@
-import SignIn from '~/utils/server/SignIn';
-import generateAccessToken from '~/utils/server/generateAccessToken';
-import generateRefreshToken from '~/utils/server/generateRefreshToken';
+import SignIn from '~/utils/server/auth/SignIn';
+import generateAccessToken from '~/utils/server/token/generateAccessToken';
+import generateRefreshToken from '~/utils/server/token/generateRefreshToken';
 import { SignInData } from '~/utils/server/types';
-import validateSignIn from '~/utils/server/validateSignIn';
+import validateSignIn from '~/utils/server/auth/validateSignIn';
 
 export default defineEventHandler(async (event) => {
     const body: SignInData = await readBody(event);
-    const validate = validateSignIn(body);
-    if (!validate.validate) {
+    const { validate, message } = validateSignIn(body);
+
+    if (!validate) {
         setResponseStatus(event, 400);
         return {
             data: null,
             error: {
                 code: 400,
-                message: validate.message,
+                message,
             },
         };
     }
+
     const createUserResult = await SignIn(body);
-    if (createUserResult.status) {
-        return {
-            data: {
-                token: generateAccessToken(createUserResult.user),
-                refresh: generateRefreshToken(createUserResult.user),
-            },
-            error: null,
-        };
-    } else {
+
+    if (!createUserResult.status || !createUserResult.user) {
         return {
             data: null,
             error: {
@@ -35,4 +30,12 @@ export default defineEventHandler(async (event) => {
             },
         };
     }
+
+    return {
+        data: {
+            token: generateAccessToken(createUserResult.user),
+            refresh: generateRefreshToken(createUserResult.user),
+        },
+        error: null,
+    };
 });

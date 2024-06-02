@@ -1,12 +1,17 @@
 import jwt from 'jsonwebtoken';
 import { PrismaClient } from '@prisma/client';
+import type { DecodedToken } from '../types';
 
 const prisma = new PrismaClient();
-interface DecodedToken {
-    login: string;
-}
+
 export default async (refreshToken: string) => {
     const refreshSecret = process.env.NUXT_AUTH_REFRESH_TOKEN_SALT as string;
+
+    if (!refreshSecret) {
+        throw new Error(
+            'NUXT_AUTH_REFRESH_TOKEN_SALT is not defined in environment variables'
+        );
+    }
 
     try {
         const decoded = jwt.verify(refreshToken, refreshSecret) as DecodedToken;
@@ -18,8 +23,9 @@ export default async (refreshToken: string) => {
         });
 
         if (!user) {
-            throw new Error('Пользователя не существует');
+            throw new Error('Пользователь не существует');
         }
+
         return user;
     } catch (error) {
         throw new Error('Невалидный рефреш токен');
