@@ -1,3 +1,3 @@
 export default defineEventHandler(async (event) => {
-  return "Hello Nitro";
+    return process.env.NUXT_AUTH_TOKEN_SALT;
 });
