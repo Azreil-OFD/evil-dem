@@ -1,17 +1,20 @@
 import { PrismaClient } from '@prisma/client';
 import type { SignUpData } from '../types';
 import hashPassword from './hashPassword';
-const prisma = new PrismaClient();
 
-export default async (data: SignUpData) => {
-    data.role = 'Клиент';
+export default async (user_data: SignUpData) => {
+    user_data.role = 'Клиент';
     let user;
-    data.password = await hashPassword(data.password);
+
+    user_data.password = await hashPassword(user_data.password);
     try {
-        user = await prisma.user.create({
-            data: data,
+        const data = await $fetch('http://10.8.0.3:3000/user/create', {
+            method: 'POST',
+            body: user_data,
         });
+        user = data;
     } catch (error) {
+        console.log(error);
         return {
             status: false,
             user: null,

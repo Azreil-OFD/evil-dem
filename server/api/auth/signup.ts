@@ -20,7 +20,6 @@ export default defineEventHandler(async (event) => {
     }
 
     const createUserResult = await SignUp(body);
-
     if (!createUserResult) {
         return {
             data: null,
