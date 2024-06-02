@@ -1,4 +1,4 @@
-import SignUp from '~/utils/server/auth/SignUp';
+import SignUp from '~/utils/server/SignUp';
 import generateAccessToken from '~/utils/server/token/generateAccessToken';
 import generateRefreshToken from '~/utils/server/token/generateRefreshToken';
 import { SignUpData } from '~/utils/server/types';

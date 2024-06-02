@@ -7,7 +7,7 @@ export default defineNuxtConfig({
             enabled: true,
         },
     },
-    ssr: false,
+    ssr: true,
     css: ['~/assets/css/global.scss'],
     modules: ['@nuxt/test-utils/module', 'nuxt-openapi-docs-module'],
     openApiDocs: {
