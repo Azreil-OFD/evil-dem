@@ -17,18 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue';
-
-onMounted(() => {
-  const authToken = useCookie('token').value
-  const refreshToken = useCookie('refreshToken').value
-
-  if (authToken && refreshToken) {
-    navigateTo('/home')
-  } else {
-    console.log('Пользователь не авторизован')
-  }
-})
+import { ref } from 'vue';
 
 const password = ref('');
 const login = ref('');

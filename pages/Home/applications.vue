@@ -1,7 +1,7 @@
 <template>
   <div class="application">
     <details class="application-title">
-      <summary>Заявки</summary>
+      <summary>Список заявок</summary>
       <details class="application-actual">
         <summary>Актуальные</summary>
         <p><b>Имя:</b> ООО Россети<br><b>Дата добавления:</b> 02.02.2022<br><b>Оборудование:</b> компьютер<br><b>Тип
@@ -86,6 +86,24 @@ b {
   padding: 13px 30px;
 }
 
+.application-title > summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.application-title > summary::after {
+  content: '▲'; /* Юникод символ стрелки вправо */
+  transform: rotate(180deg);
+  color: #999999;
+  transition: transform 0.5s;
+}
+
+/* Поворот стрелки при раскрытии */
+details[open] summary::after {
+  transform: rotate(0deg);
+}
+
 .application-actual summary,
 .application-completed summary {
   list-style-type: circle;
@@ -98,6 +116,6 @@ b {
 }
 
 .application-actual {
-  margin-top: 30px;
+  margin-top: 20px;
 }
 </style>
