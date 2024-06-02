@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '~/electron/client';
 import type { DecodedToken } from '../types';
 
 const prisma = new PrismaClient();

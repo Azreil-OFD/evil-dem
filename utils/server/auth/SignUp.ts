@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '~/electron/client';
 import type { SignUpData } from '../types';
 import hashPassword from './hashPassword';
 const prisma = new PrismaClient();
