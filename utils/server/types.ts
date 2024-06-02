@@ -6,7 +6,7 @@ export type SignUpData = {
     password: string;
 };
 export type SignInData = {
-    login: string;
+    login: string;  
     password: string;
 };
 export type TokenData = {
