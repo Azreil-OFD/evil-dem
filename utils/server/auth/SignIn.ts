@@ -5,15 +5,27 @@ import type { SignInData } from '../types';
 const prisma = new PrismaClient();
 
 export default async (user_data: SignInData) => {
-    let user: User;
+    let user:
+        | {
+              data: User;
+              status: boolean;
+          }
+        | any;
     try {
-        const { data } = await $fetch('http://10.8.0.3:3000/user/create', {
+        const data:
+            | {
+                  data: User;
+                  status: boolean;
+              }
+            | any = await $fetch('http://10.8.0.3:3000/user/find-unique', {
             method: 'POST',
             body: {
                 login: user_data.login,
             },
         });
+
         user = data;
+
         if (!user) {
             return {
                 status: false,
@@ -21,10 +33,9 @@ export default async (user_data: SignInData) => {
                 error: 'Неверный логин или пароль',
             };
         }
-
         const passwordValid = await bcrypt.compare(
             user_data.password,
-            user.password
+            user.data.password
         );
 
         if (!passwordValid) {

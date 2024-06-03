@@ -3,8 +3,8 @@ import { PrismaClient, type User } from '@prisma/client';
 import type { DecodedToken } from '../types';
 
 export default async (refreshToken: string) => {
-    const refreshSecret = process.env.NUXT_AUTH_REFRESH_TOKEN_SALT as string;
-
+    const refreshSecret = process.env.NUXT_AUTH_TOKEN_SALT as string;
+    console.log(refreshToken);
     if (!refreshSecret) {
         throw new Error(
             'NUXT_AUTH_REFRESH_TOKEN_SALT is not defined in environment variables'
@@ -13,7 +13,7 @@ export default async (refreshToken: string) => {
 
     try {
         const decoded = jwt.verify(refreshToken, refreshSecret) as DecodedToken;
-
+        console.log(decoded);
         let user:
             | {
                   data: User;
