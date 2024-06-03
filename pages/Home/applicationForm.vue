@@ -245,8 +245,20 @@ const getFaults = () => {
   return equip ? equip.faults : [];
 }
 
-const send_application = () => {
-  // smth..
+const send_application = async () => {
+  const data = await useFetch('/api/applications/create', {
+    method: 'POST',
+    body: {
+      equipment: equipment.value,
+      issueType: type_of_fault.value,
+      description: problem_description.value
+    }
+  })
+if(!data.data.value.status) {
+  alert('Ошибка создания заяки')
+} else {
+  window.location.reload();
+}
 }
 </script>
 

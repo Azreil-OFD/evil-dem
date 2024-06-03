@@ -13,7 +13,6 @@ export default async (refreshToken: string) => {
 
     try {
         const decoded = jwt.verify(refreshToken, refreshSecret) as DecodedToken;
-
         let user:
             | {
                   data: User;
@@ -25,7 +24,7 @@ export default async (refreshToken: string) => {
                   data: User;
                   status: boolean;
               }
-            | any = await $fetch('http://10.8.0.3:3000/user/find-unique', {
+            | any = await $fetch('http://localhost:3001/user/find-unique', {
             method: 'POST',
             body: {
                 login: decoded.login,

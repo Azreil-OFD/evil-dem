@@ -8,13 +8,12 @@ export default async (user_data: SignUpData) => {
 
     user_data.password = await hashPassword(user_data.password);
     try {
-        const data = await $fetch('http://10.8.0.3:3000/user/create', {
+        const data = await $fetch('http://localhost:3001/user/create', {
             method: 'POST',
             body: user_data,
         });
         user = data;
     } catch (error) {
-        console.log(error);
         return {
             status: false,
             user: null,

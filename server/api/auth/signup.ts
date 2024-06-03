@@ -20,6 +20,7 @@ export default defineEventHandler(async (event) => {
     }
 
     const createUserResult = await SignUp(body);
+    
     if (!createUserResult) {
         return {
             data: null,
@@ -39,8 +40,9 @@ export default defineEventHandler(async (event) => {
             },
         };
     }
-
+    console.log(createUserResult)
     if (createUserResult.user) {
+
         return {
             data: {
                 token: generateAccessToken(createUserResult.user),

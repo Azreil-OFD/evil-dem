@@ -9,9 +9,8 @@ export default (tokenDataRaw: TokenData): string => {
             'NUXT_AUTH_REFRESH_TOKEN_SALT is not defined in environment variables'
         );
     }
-
-    const { fullName, organization, login, role } = tokenDataRaw;
-    const tokenData: TokenData = { fullName, organization, login, role };
-
-    return jwt.sign(tokenData, refreshSecret, { expiresIn: '7d' });
+    const {id ,  fullName, organization, login, role } = tokenDataRaw.data;
+    const tokenData: TokenData = { id , fullName, organization, login, role };
+    const result = jwt.sign(tokenData, refreshSecret, { expiresIn: '7d' })
+    return result;
 };

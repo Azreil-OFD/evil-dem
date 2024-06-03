@@ -17,7 +17,7 @@ export default async (user_data: SignInData) => {
                   data: User;
                   status: boolean;
               }
-            | any = await $fetch('http://10.8.0.3:3000/user/find-unique', {
+            | any = await $fetch('http://localhost:3001/user/find-unique', {
             method: 'POST',
             body: {
                 login: user_data.login,
