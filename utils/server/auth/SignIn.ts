@@ -1,17 +1,28 @@
-import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
-import type { SignInData } from './types';
+import type { SignInData } from '../types';
 
-const prisma = new PrismaClient();
 
-export default async (data: SignInData) => {
-    let user;
+export default async (user_data: SignInData) => {
+    let user:
+        | {
+              data: any;
+              status: boolean;
+          }
+        | any;
     try {
-        user = await prisma.user.findUnique({
-            where: {
-                login: data.login,
+        const data:
+            | {
+                  data: any;
+                  status: boolean;
+              }
+            | any = await $fetch('http://localhost:3001/user/find-unique', {
+            method: 'POST',
+            body: {
+                login: user_data.login,
             },
         });
+
+        user = data;
 
         if (!user) {
             return {
@@ -20,10 +31,9 @@ export default async (data: SignInData) => {
                 error: 'Неверный логин или пароль',
             };
         }
-
         const passwordValid = await bcrypt.compare(
-            data.password,
-            user.password
+            user_data.password,
+            user.data.password
         );
 
         if (!passwordValid) {

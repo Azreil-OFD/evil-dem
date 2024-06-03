@@ -1,25 +1,26 @@
-import generateAccessToken from '~/utils/server/generateAccessToken';
-import generateRefreshToken from '~/utils/server/generateRefreshToken';
+import generateAccessToken from '~/utils/server/token/generateAccessToken';
+import generateRefreshToken from '~/utils/server/token/generateRefreshToken';
 import { RefreshTokenData } from '~/utils/server/types';
-import validateRefreshToken from '~/utils/server/validateRefreshToken';
-import verifyRefreshToken from '~/utils/server/verifyRefreshToken';
+import validateRefreshToken from '~/utils/server/token/validateRefreshToken';
+import verifyRefreshToken from '~/utils/server/token/verifyRefreshToken';
 
 export default defineEventHandler(async (event) => {
     const body: RefreshTokenData = await readBody(event);
-    const validate = validateRefreshToken(body);
-    if (!validate.validate) {
+    const { validate, message } = validateRefreshToken(body);
+
+    if (!validate) {
         setResponseStatus(event, 400);
         return {
             data: null,
             error: {
                 code: 400,
-                message: validate.message,
+                message,
             },
         };
     }
+
     try {
         const user = await verifyRefreshToken(body.refreshToken);
-
         return {
             data: {
                 token: generateAccessToken(user),
@@ -27,7 +28,7 @@ export default defineEventHandler(async (event) => {
             },
             error: null,
         };
-    } catch (error) {
+    } catch {
         setResponseStatus(event, 401);
         return {
             data: null,

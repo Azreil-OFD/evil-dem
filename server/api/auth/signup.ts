@@ -1,33 +1,37 @@
-import { PrismaClient } from '@prisma/client';
-import SignUp from '~/utils/server/SignUp';
-import generateAccessToken from '~/utils/server/generateAccessToken';
-import generateRefreshToken from '~/utils/server/generateRefreshToken';
+import SignUp from '~/utils/server/auth/SignUp';
+import generateAccessToken from '~/utils/server/token/generateAccessToken';
+import generateRefreshToken from '~/utils/server/token/generateRefreshToken';
 import { SignUpData } from '~/utils/server/types';
-import validateSignUp from '~/utils/server/validateSignUp';
+import validateSignUp from '~/utils/server/auth/validateSignUp';
 
 export default defineEventHandler(async (event) => {
     const body: SignUpData = await readBody(event);
-    const validate = validateSignUp(body);
-    if (!validate.validate) {
+    const { validate, message } = validateSignUp(body);
+
+    if (!validate) {
         setResponseStatus(event, 400);
         return {
             data: null,
             error: {
                 code: 400,
-                message: validate.message,
+                message,
             },
         };
     }
+
     const createUserResult = await SignUp(body);
-    if (createUserResult.status) {
+    
+    if (!createUserResult) {
         return {
-            data: {
-                token: generateAccessToken(createUserResult.user),
-                refresh: generateRefreshToken(createUserResult.user),
+            data: null,
+            error: {
+                code: 500,
+                message: 'Internal Server Error',
             },
-            error: null,
         };
-    } else {
+    }
+
+    if (!createUserResult.status) {
         return {
             data: null,
             error: {
@@ -36,4 +40,23 @@ export default defineEventHandler(async (event) => {
             },
         };
     }
+    console.log(createUserResult)
+    if (createUserResult.user) {
+
+        return {
+            data: {
+                token: generateAccessToken(createUserResult.user),
+                refresh: generateRefreshToken(createUserResult.user),
+            },
+            error: null,
+        };
+    }
+
+    return {
+        data: null,
+        error: {
+            code: 500,
+            message: 'Internal Server Error',
+        },
+    };
 });

@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     },
     ssr: false,
     css: ['~/assets/css/global.scss'],
-    modules: ['@nuxt/test-utils/module', 'nuxt-openapi-docs-module'],
+    modules: ['@nuxt/test-utils/module', 'nuxt-openapi-docs-module', '@pinia/nuxt'],
     openApiDocs: {
         folder: './docs',
         name: 'Api Docs',

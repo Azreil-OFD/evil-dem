@@ -245,8 +245,23 @@ const getFaults = () => {
   return equip ? equip.faults : [];
 }
 
-const send_application = () => {
-  // smth..
+const send_application = async () => {
+  const data = await $fetch('/api/applications/create', {
+    method: "POST",
+    body: {
+      equipment: equipment.value,
+      issueType: type_of_fault.value,
+      description: problem_description.value
+    }
+  })
+
+  console.log(data);
+
+  if (data.status) {
+    window.location.reload()
+  } else {
+    alert("Ошибка создания заявки")
+  }
 }
 </script>
 
