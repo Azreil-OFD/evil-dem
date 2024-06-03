@@ -10,7 +10,7 @@ const data: any = ref(null);
 const error: any = ref(null);
 
 const load = () => {
-    const result = useFetch('/api/hello');
+    const { data, pending, error, refresh } = useFetch();
     data.value = result.data;
     error.value = result.error;
 };
