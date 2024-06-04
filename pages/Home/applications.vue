@@ -50,7 +50,7 @@ await store.fetchApplications();
 
 applications.value = store.applications;
 user.value = store.user;
-
+console.log(applications.value);
 </script>
 
 <style lang="scss" scoped>

@@ -263,6 +263,10 @@ const send_application = async () => {
   if (!(data.status)) {
     alert("Ошибка создания заявки")
   }
+
+  equipment.value = ''
+  type_of_fault.value = ''
+  problem_description.value = ''
 }
 </script>
 
