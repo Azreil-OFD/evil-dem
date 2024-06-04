@@ -26,10 +26,13 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { useApplicationsStore } from '~/store/applications.store';
 
 const equipment = ref('')
 const type_of_fault = ref('')
 const problem_description = ref('')
+
+const store = useApplicationsStore();
 
 const equipments = [
   {
@@ -255,11 +258,9 @@ const send_application = async () => {
     }
   })
 
-  console.log(data);
+  store.addApplication(data.data)
 
-  if (data.status) {
-    window.location.reload()
-  } else {
+  if (!(data.status)) {
     alert("Ошибка создания заявки")
   }
 }

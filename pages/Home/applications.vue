@@ -38,16 +38,19 @@
 </template>
 
 <script lang="ts" setup>
+import { useApplicationsStore } from '~/store/applications.store';
+
 const authToken = useCookie('refreshToken');
 const applications = ref([])
 const user = ref([])
 
-const data = await $fetch('/api/applications', {
-  method: 'POST'
-})
+const store = useApplicationsStore();
 
-applications.value = data.data
-user.value = data.user
+await store.fetchApplications();
+
+applications.value = store.applications;
+user.value = store.user;
+
 </script>
 
 <style lang="scss" scoped>
